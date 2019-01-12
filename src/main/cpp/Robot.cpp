@@ -11,6 +11,7 @@
 
 DriveTrain* Robot::m_drive;
 OI* Robot::m_oi;
+Piston* Robot::m_piston;
 
 void Robot::RobotInit() {
   // m_chooser.AddDefault("Default Auto", &m_defaultAuto);
@@ -36,6 +37,7 @@ void Robot::RobotPeriodic() {}
 void Robot::DisabledInit() {
   m_drive = new DriveTrain();
   m_oi = new OI();
+  m_piston = new Piston();
 }
 
 void Robot::DisabledPeriodic() { frc::Scheduler::GetInstance()->Run(); }

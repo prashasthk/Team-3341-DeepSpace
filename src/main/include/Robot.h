@@ -13,11 +13,13 @@
 
 #include "OI.h"
 #include "Subsystems/DriveTrain.h"
+#include "Subsystems/Piston.h"
 
 class Robot : public frc::TimedRobot {
  public:
   static DriveTrain* m_drive;
   static OI* m_oi;
+  static Piston* m_piston;
 
   void RobotInit() override;
   void RobotPeriodic() override;
