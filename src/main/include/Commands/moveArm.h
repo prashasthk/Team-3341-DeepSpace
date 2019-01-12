@@ -4,30 +4,19 @@
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
+
 #pragma once
-#include <WPILib.h>
-#include "RobotMap.h"
-class OI {
-private:
-	Joystick*driveStickLeft;
-	Joystick*driveStickRight;
-	Joystick*moveArmLeft;
-	Button*leftRightDrive;
-	Button*releaseCargo;
+
+#include "OI.h"
+#include <Commands/Command.h>
+
+class moveArm : public frc::Command {
 public:
-	OI();
-	~OI();
-	Joystick* getDriveStickLeft();
-	Joystick* getDriveStickRight();
-	Joystick* getMoveArmLeft();
-	Button* getPIDArm();
+	moveArm();
+	void Initialize() override;
+	void Execute() override;
+	bool IsFinished() override;
+	void End() override;
+	void Interrupted() override;
 };
-
-
-
-
-
-
-
-
 

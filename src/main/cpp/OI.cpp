@@ -6,17 +6,26 @@
 /*----------------------------------------------------------------------------*/
 
 #include "OI.h"
+//#include "Commands/ArmPositionPID.h"
+#include "ctre/Phoenix.h"
+#include "WPILib.h"
+#include "Commands/AutoReleaseCargo.h"
+//#include "Commands/LeftRightDrive.h"
 
-#include <WPILib.h>
 
-OI::OI() : leftJoy(new Joystick(0)), rightJoy(new Joystick(1)){
-  // Process operator interface input here.
+OI::OI() : driveStickLeft(new Joystick(joystickleftPort)),
+driveStickRight(new Joystick(joystickrightPort)),
+moveArmLeft(new Joystick(armMovePort)),
+releaseCargo(new JoystickButton(moveArmLeft,autoArmPort)) {
+releaseCargo->WhenPressed(new AutoReleaseCargo(10));
+}
+Joystick* OI::getDriveStickLeft() {
+	return driveStickLeft;
+}
+Joystick*OI::getDriveStickRight() {
+	return driveStickRight;
+}
+Joystick* OI::getMoveArmLeft() {
+	return moveArmLeft;
 }
 
-Joystick* OI::getLeft(){
-  return leftJoy;
-}
-
-Joystick* OI::getRight(){
-  return rightJoy;
-}

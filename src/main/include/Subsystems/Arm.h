@@ -6,21 +6,25 @@
 /*----------------------------------------------------------------------------*/
 
 #pragma once
-
-#include <Commands/Subsystem.h>
-#include "ctre/Phoenix.h"
+#include "OI.h"
 #include "WPILib.h"
+#include "ctre/Phoenix.h"
+#include "RobotMap.h"
+#include <Commands/Subsystem.h>
 
-class DriveTrain : public frc::Subsystem {
- private:
- TalonSRX* left;
- TalonSRX* right;
-   // It's desirable that everything possible under private except
-  // for methods that implement subsystem capabilities
+class Arm : public frc::Subsystem {
+private:
+	TalonSRX* arm;
+	// It's desirable that everything possible under private except
+	// for methods that implement subsystem capabilities
 
- public:
-  DriveTrain();
-  void tankDrive(double leftPow, double rightPow);
-  //void moveArm(double armPower);
-  void InitDefaultCommand() override;
+public:
+	Arm();
+	~Arm();
+	void MoveArm(double armValue);
+	void reset();
+	TalonSRX* getArmMotor();
+	double getPosition();
+	void InitDefaultCommand() override;
 };
+

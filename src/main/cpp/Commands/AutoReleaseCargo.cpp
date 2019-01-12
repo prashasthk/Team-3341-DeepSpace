@@ -5,33 +5,44 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "Commands/TankDrive.h"
-#include "Robot.h"
+#include "Commands/AutoReleaseCargo.h"
 #include "iostream"
 using namespace std;
 
-TankDrive::TankDrive() {
+AutoReleaseCargo::AutoReleaseCargo(double setpoint) {
+  Requires(Robot::arm);
+  target = setpoint;
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
-  Requires(Robot::m_drive);
 }
 
 // Called just before this Command runs the first time
-void TankDrive::Initialize() {}
+void AutoReleaseCargo::Initialize() {
+  Robot::arm->reset();
+  cout << Robot::arm->getPosition() << endl;
+}
 
 // Called repeatedly when this Command is scheduled to run
-void TankDrive::Execute() {
-  double leftVal = Robot::m_oi->getLeft()->GetY();
-  double rightVal = Robot::m_oi->getRight()->GetY();
-  Robot::m_drive->tankDrive(leftVal, rightVal);
+void AutoReleaseCargo::Execute() {
+  currentPosition = Robot::arm->getPosition();
+   cout<< currentPosition << endl;
+  Robot::arm->MoveArm(0.8);
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool TankDrive::IsFinished() { return false; }
+bool AutoReleaseCargo::IsFinished() {
+   if (fabs(currentPosition - target) < 1) {
+     return true;
+   }
+   else {
+     return false;
+   }
+  }
 
 // Called once after isFinished returns true
-void TankDrive::End() {}
-
+void AutoReleaseCargo::End() {
+Robot::arm->MoveArm(0);
+}
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void TankDrive::Interrupted() {}
+void AutoReleaseCargo::Interrupted() {}

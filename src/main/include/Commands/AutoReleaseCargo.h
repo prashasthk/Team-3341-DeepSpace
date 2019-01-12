@@ -8,10 +8,15 @@
 #pragma once
 
 #include <Commands/Command.h>
+#include "Subsystems/Arm.h"
+#include "../Robot.h"
 
-class TankDrive : public frc::Command {
+class AutoReleaseCargo : public frc::Command {
+ private:
+ double target;
+ double currentPosition;
  public:
-  TankDrive();
+  AutoReleaseCargo(double setpoint);
   void Initialize() override;
   void Execute() override;
   bool IsFinished() override;

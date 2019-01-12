@@ -6,10 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 #pragma once
-#include <cmath>
 
-constexpr int leftMotorPort = 2;
-constexpr int rightMotorPort = 3;
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -26,3 +23,10 @@ constexpr int rightMotorPort = 3;
 // number and the module. For example you with a rangefinder:
 // constexpr int kRangeFinderPort = 1;
 // constexpr int kRangeFinderModule = 1;
+constexpr int joystickleftPort =1;
+constexpr int joystickrightPort =1;
+//constexpr int LEFTMOTOR =1;
+//constexpr int RIGHTMOTOR =1;
+constexpr int armMovePort = 3;
+constexpr int ArmMotorPort =4;
+constexpr int autoArmPort = 7;
